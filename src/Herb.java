@@ -1,5 +1,4 @@
 import java.awt.AWTException;
-import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -11,25 +10,29 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class Banana {
+public class Herb {
 	private static Robot robot;
 
 	public static void main(String[] args) throws InterruptedException, AWTException {
 		robot = new Robot();
 		JFrame frame = new JFrame();
 		
-		JOptionPane.showMessageDialog(frame, "Prepare backpack bucket1 location!");
-		Point bucket1_loc = MouseInfo.getPointerInfo().getLocation();
+		JOptionPane.showMessageDialog(frame, "Prepare backpack herb1 location!");
+		Point herb1_loc = MouseInfo.getPointerInfo().getLocation();
+			
+		JOptionPane.showMessageDialog(frame, "Prepare backpack herbLast location!Must point on the grimy part");
+		Point herbLast_loc = MouseInfo.getPointerInfo().getLocation();
+		
+		
+		JOptionPane.showMessageDialog(frame, "Prepare clean button location after click on a grimy herb");
+		Point cleanButton_loc = MouseInfo.getPointerInfo().getLocation();
 		
 		//Get a Banker location
 		JOptionPane.showMessageDialog(frame, "Prepare banker location!");
 		Point banker_loc = MouseInfo.getPointerInfo().getLocation();
 		
-		JOptionPane.showMessageDialog(frame, "Prepare bank bucket location!");
-		Point bucket_loc = MouseInfo.getPointerInfo().getLocation();
-		
-		JOptionPane.showMessageDialog(frame, "Prepare bank banana location!");
-		Point banana_loc = MouseInfo.getPointerInfo().getLocation();
+		JOptionPane.showMessageDialog(frame, "Prepare bank herb location!");
+		Point bankHerb_loc = MouseInfo.getPointerInfo().getLocation();
 		
 		JOptionPane.showMessageDialog(frame, "Prepare bank deposit location!");
 		Point deposit_loc = MouseInfo.getPointerInfo().getLocation();
@@ -49,24 +52,17 @@ public class Banana {
 			
 			//deposit
 			leftClick(deposit_loc);
-			
-			//right click bucket and withdraw 5
-			rightClick(bucket_loc);
 			robot.delay(100);
-			robot.mouseMove(bucket_loc.x, bucket_loc.y + 50);
+			
+			//right click herb and withdraw all
+			rightClick(bankHerb_loc);
+			robot.delay(100);
+			robot.mouseMove(bankHerb_loc.x, bankHerb_loc.y + 110);
 			robot.delay(100);
 			leftClick(MouseInfo.getPointerInfo().getLocation());
 			robot.delay(100);
 			
-			//right click banana and withdraw 20
-			rightClick(banana_loc);
-			robot.delay(100);
-			robot.mouseMove(banana_loc.x, banana_loc.y + 75);
-			robot.delay(100);
-			leftClick(MouseInfo.getPointerInfo().getLocation());
-			robot.delay(100);
-			
-	        
+	        //close bank
 	        robot.keyPress(KeyEvent.VK_ESCAPE);
 	        robot.delay(100);
 	        robot.keyRelease(KeyEvent.VK_ESCAPE);
@@ -81,21 +77,39 @@ public class Banana {
 		        robot.delay(100);
 			}
 			
-			//Click bucket 1, 2, 3, 4
-			leftClick(bucket1_loc);
+			//Click grimy herb
+			leftClick(herb1_loc);
 			
-			leftClick(new Point(bucket1_loc.x+46, bucket1_loc.y));
 			robot.delay(100);
 			
+			//wait for clean screen to appear
+//			while (robot.getPixelColor(cleanScreenTitle_loc.x, cleanScreenTitle_loc.y).getRGB() != cleanScreenTitle_color){
+//				// Close bank
+//		        robot.delay(100);
+//			}
+//			
+			robot.delay(1500);
 			
-			leftClick(new Point(bucket1_loc.x+92, bucket1_loc.y));
+			//Click clean button
+			leftClick(cleanButton_loc);
 			robot.delay(100);
 			
-			leftClick(new Point(bucket1_loc.x+138, bucket1_loc.y));
-			robot.delay(100);	
+			robot.delay(15000);
 			
+			//Wait for last grimy herb turn clean
+			robot.mouseMove(herbLast_loc.x, herbLast_loc.y);
+			int herbLast_color = robot.getPixelColor(herbLast_loc.x, herbLast_loc.y).getRGB();
+//			while (robot.getPixelColor(herbLast_loc.x, herbLast_loc.y).getRGB() == herbLast_color){
+//				// Close bank
+////				System.out.println("1:"+robot.getPixelColor(herbLast_loc.x, herbLast_loc.y).getRGB());
+////				System.out.println("2:"+herbLast_color);
+//		        robot.delay(500);
+//			}
+			robot.delay(500);
 		}
+			
 	}
+
 	
 
 
@@ -129,4 +143,3 @@ public class Banana {
 		robot.mouseRelease(MouseEvent.BUTTON3_MASK);
 	}
 }
-

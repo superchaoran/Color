@@ -122,7 +122,7 @@ public class Mining{
 			e.printStackTrace();
 		}
 	    
-	    	URL soundURL = ColorPick.class.getResource("beep-01a.wav");
+	    	URL soundURL = Mining.class.getResource("beep-01a.wav");
 
 				AudioInputStream audioStream;
 				try {
