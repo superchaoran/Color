@@ -56,11 +56,11 @@ public class Herb {
 			
 			//right click herb and withdraw all
 			rightClick(bankHerb_loc);
-			robot.delay(100);
+			robot.delay(400);
 			robot.mouseMove(bankHerb_loc.x, bankHerb_loc.y + 110);
-			robot.delay(100);
+			robot.delay(200);
 			leftClick(MouseInfo.getPointerInfo().getLocation());
-			robot.delay(100);
+			robot.delay(200);
 			
 	        //close bank
 	        robot.keyPress(KeyEvent.VK_ESCAPE);
@@ -68,9 +68,6 @@ public class Herb {
 	        robot.keyRelease(KeyEvent.VK_ESCAPE);
 	        robot.delay(200);
 	        
-	        robot.keyPress(KeyEvent.VK_ESCAPE);
-	        robot.delay(100);
-	        robot.keyRelease(KeyEvent.VK_ESCAPE);
 			//check backpack unlock
 			while (robot.getPixelColor(lock_loc.x, lock_loc.y).getRGB() == lock_color){
 				// Close bank
@@ -88,7 +85,7 @@ public class Herb {
 //		        robot.delay(100);
 //			}
 //			
-			robot.delay(1500);
+			robot.delay(2000);
 			
 			//Click clean button
 			leftClick(cleanButton_loc);
@@ -138,7 +135,7 @@ public class Herb {
 	
 	public static void rightClick(Point p) {
 		robot.mouseMove(p.x, p.y);
-		robot.delay(100);
+		robot.delay(200);
 		robot.mousePress(MouseEvent.BUTTON3_MASK);
 		robot.mouseRelease(MouseEvent.BUTTON3_MASK);
 	}

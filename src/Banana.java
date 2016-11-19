@@ -72,9 +72,6 @@ public class Banana {
 	        robot.keyRelease(KeyEvent.VK_ESCAPE);
 	        robot.delay(200);
 	        
-	        robot.keyPress(KeyEvent.VK_ESCAPE);
-	        robot.delay(100);
-	        robot.keyRelease(KeyEvent.VK_ESCAPE);
 			//check backpack unlock
 			while (robot.getPixelColor(lock_loc.x, lock_loc.y).getRGB() == lock_color){
 				// Close bank
